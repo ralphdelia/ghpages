@@ -17,6 +17,10 @@
   margin-left: auto;
 }
 
+.group-list {
+  width: 100%;
+}
+
 h2 {
   margin: var(--pico-typography-spacing-vertical) 0
     var(--pico-typography-spacing-vertical) 0;
