@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>HTML 5 Boilerplate</title>
+
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.slate.min.css"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body class="container">
+    <nav>
+      <ul>
+        <li><strong>Ralph Delia</strong></li>
+      </ul>
+      <ul>
+        <li><a href="index.html">Projects</a></li>
+        <li><a href="now.html">Now</a></li>
+        <li><a href="about.html">About</a></li>
+      </ul>
+    </nav>
+
+    <br />
+    <hgroup>
+      <h1><mark>Projects</mark></h1>
+    </hgroup>
+
+    <article>
+      <p class="date-container">
+        <small class="date">Sep 12, 2024</small>
+      </p>
+      <h2 id="onview">OnView</h2>
+      <p class="tagline">
+        A way to discover visually similar paintings that are part of the
+        Metropolitan Museum of Art's Open Access Initiative.
+      </p>
+      <hr />
+      <div>
+        <p>
+          I made a website called <a
+            href="https://onview.ralphdelia1.workers.dev/"
+            target="_blank"
+            >OnView</a
+          >. It's a way to discover visually similar paintings from the
+          collection of the <a href="https://www.metmuseum.org/" target="_blank"
+            >Metropolitan Museum of Art (MET)</a
+          >
+          in New York City. OnView provides similarity rankings based on the
+          visual characteristics of the paintings by using embeddings generated
+          using
+          <a href="https://openai.com/index/clip/" target="_blank"
+            >OpenAIs CLIP model</a
+          >. The artworks used in this project are available under Creative
+          Commons Zero through the museum's <a
+            href="https://www.metmuseum.org/about-the-met/policies-and-documents/open-access"
+            target="_blank"
+            >Open Access Initiative</a
+          >.
+          <br />
+        </p>
+        <img
+          src="assets/images/onview/onview.ralphdelia1.workers.dev_artwork_21693_.png"
+        />
+        <br />
+        <p>
+          You can find the site
+          <a href="https://onview.ralphdelia1.workers.dev/" target="_blank"
+            >here</a
+          >
+          and the GitHub repo
+          <a href="https://github.com/ralphdelia/onview" target="_blank">here</a
+          >.
+        </p>
+      </div>
+
+      <h4>Why</h4>
+      <p>
+        I find it interesting how art from different periods and cultures can
+        share visual similarities. Oftentimes, curatorial decisions at the MET
+        are based on groupings according to specific art movements, eras, or
+        cultures. This can make it difficult to notice visual connections
+        between artworks that are placed in different classifications or
+        categories.
+      </p>
+      <p>
+        I wanted to make a tool that helped to organize the MET's paintings in a
+        new way. My goal was to create something that made it easier to spot
+        associates and connections based on visual similarities throughout the
+        collection.
+      </p>
+
+      <h4>How</h4>
+      <p>
+        Data for each painting was accessed through the MET museum's open-access
+        API. I used Hugging Face to run images through OpenAI's CLIP model to
+        generate embeddings.
+      </p>
+      <p>
+        An embedding is a numerical representation of the features of some data,
+        in my case, images of paintings. The AI model evaluates the images and
+        defines a feature of the image through a number. OpenAI's CLIP model,
+        which was used for this project, evaluates each image on 512 different
+        features. Each feature is stored in a list called a vector.
+      </p>
+      <p>
+        The program compares two vectors to calculate a distance metric that
+        reflects their similarity. To rank images according to their similarity
+        to a selected image, it measures the distance between that image and
+        every other image in the database. After calculating these distances,
+        the program sorts them, placing the closest matches at the top. This
+        process results in a ranked list of images based on their similarity.
+      </p>
+      <div class="grid">
+        <div>
+          <p>
+            When a user clicks the "Find Similar" button for an artwork, the
+            system retrieves the embedding of that artwork and uses it to
+            perform a vector search. The artwork embedding is compared to all of
+            the other embeddings stored in the vector database. The query
+            returns ranked results, along with the necessary metadata to display
+            each artwork on the page.
+          </p>
+          <p>
+            The application is deployed on a Cloudflare Worker using Hono, a
+            backed JavaScript framework. Hono's built-in middleware, which
+            supports JSX rendering made it easy to display the results. For
+            database storage, I used Cloudflare's D1, and for similarity-based
+            rankings using the generated embeddings, I used Cloudflare's vector
+            database, Vectorize.
+          </p>
+        </div>
+        <img class="inline-img" src="assets/images/onview/onview_detail.png" />
+      </div>
+
+      <h4>Takeaways</h4>
+      <p>
+        This project was a ton of fun to put together, especially since it was
+        my first time working with all of the listed technologies. While there
+        was a learning curve, the overall experience was incredibly rewarding.
+        Once the interface was live, it was thrilling to watch the image
+        associations and visual archetypes come to life. I found myself clicking
+        "Find Similar" constantly, uncovering new connections between artworks.
+      </p>
+      <p>
+        I can easily see myself using Cloudflare Workers and Hono for future
+        small applications. I'm also amazed at the potential of embeddings for
+        working with images and will definitely be exploring this area further
+        in the future.
+      </p>
+    </article>
+  </body>
+</html>
